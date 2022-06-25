@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Queue;
-use Illuminate\Http\Request;
 
 //models
 use App\Models\Post;
@@ -11,9 +10,11 @@ use App\Models\Post;
 //jobs
 use App\Jobs\CreatePostJob;
 use App\Jobs\DeletePostJob;
+use App\Jobs\UpdatePostJob;
 
 //requests
 use App\Http\Requests\CreatePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 
 class PostController extends Controller
 {
@@ -24,7 +25,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->paginate(5);
+        $posts = Post::with(['review' => function($query) {
+            $query->select('post_id', 'abusive', 'description');
+        }])
+        ->latest()
+        ->paginate(5);
+
         return response()->json($posts, 200);
     }
 
@@ -59,7 +65,10 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::find($id);
+        $post = Post::with(['review' => function($query) {
+            $query->select('post_id', 'abusive', 'description');
+        }])
+        ->find($id);
 
         if(!isset($post)) {
             return response()->json([
@@ -73,13 +82,33 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Requests\UpdatePostRequest  $request
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(UpdatePostRequest $request)
     {
-        //
+        $post = Post::find($request->post_id);
+
+        if(!isset($post)) {
+            return response()->json([
+                'error' => 'Post not found.'
+            ], 404);
+        }
+
+        $image = $request->file('image');
+        $imageName = $image->store('public/images');
+
+        Queue::push(new UpdatePostJob([
+            'post_id' => $post->id,
+            'title' => $request->title,
+            'description' => $request->description,
+            'image' => $imageName
+        ]));
+
+        return response()->json([
+            'message' => 'Post updated.'
+        ], 200);
     }
 
     /**

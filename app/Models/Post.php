@@ -10,8 +10,13 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'title',
         'description',
         'image'
     ];
+
+    public function review() {
+        return $this->hasOne('App\Models\Review', 'post_id', 'id');
+    }
 }

@@ -10,8 +10,13 @@ class Review extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'post_id',
         'abusive',
         'description'
     ];
+
+    public function post() {
+        return $this->belongsTo('App\Models\Post', 'id', 'post_id');
+    }
 }

@@ -13,4 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResource('posts', App\Http\Controllers\PostController::class);
+Route::get('posts', 'App\Http\Controllers\PostController@index');
+Route::get('posts/{id}', 'App\Http\Controllers\PostController@show');
+Route::post('posts/create', 'App\Http\Controllers\PostController@store');
+Route::post('posts/update', 'App\Http\Controllers\PostController@update');
+Route::delete('posts/delete/{id}', 'App\Http\Controllers\PostController@destroy');

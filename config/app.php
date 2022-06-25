@@ -56,6 +56,8 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'komprehend_api_key' => env('KOMPREHEND_API_KEY', null),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
