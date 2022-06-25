@@ -29,7 +29,7 @@ class PostController extends Controller
             $query->select('post_id', 'abusive', 'description');
         }])
         ->latest()
-        ->paginate(5);
+        ->get();
 
         return response()->json($posts, 200);
     }

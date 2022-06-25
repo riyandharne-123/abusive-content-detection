@@ -14,7 +14,8 @@ class ReviewFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'abusive' => 1,
+            'description' => 'Abusive content'
         ];
     }
 }
