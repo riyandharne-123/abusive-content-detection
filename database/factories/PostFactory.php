@@ -16,7 +16,8 @@ class PostFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'image' => $this->faker->imageUrl
+            'image' => $this->faker->imageUrl,
+            'api_key' => '1234'
         ];
     }
 }

@@ -62,7 +62,8 @@ class PostTest extends TestCase
         $response = $this->post('/api/posts/create', [
             'title' => $post->title,
             'description' => $post->description,
-            'image' => UploadedFile::fake()->image('avatar.jpg')
+            'image' => UploadedFile::fake()->image('avatar.jpg'),
+            'api_key' => '1234'
         ]);
 
         $response->assertStatus(200);
@@ -79,11 +80,14 @@ class PostTest extends TestCase
             'post_id' => $createdPost->id
         ]);
 
-        Storage::assertExists($createdPost->image);
+        if ($post->api_key != '1234') {
+            Storage::assertExists($createdPost->image);
+        }
+
         Storage::delete($createdPost->image);
     }
 
-    public function test_update_single_post() {
+    public function test_update_post() {
         $post = Post::factory()->create();
         $review = Review::factory()->create([
             'post_id' => $post->id,
@@ -95,7 +99,8 @@ class PostTest extends TestCase
             'post_id' => $post->id,
             'title' => $post->title,
             'description' => $post->description,
-            'image' => UploadedFile::fake()->image('avatar.jpg')
+            'image' => UploadedFile::fake()->image('avatar.jpg'),
+            'api_key' => '1234'
         ]);
 
         $response->assertStatus(200);

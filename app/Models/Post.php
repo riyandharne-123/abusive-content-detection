@@ -13,7 +13,8 @@ class Post extends Model
         'id',
         'title',
         'description',
-        'image'
+        'image',
+        'api_key'
     ];
 
     public function review() {

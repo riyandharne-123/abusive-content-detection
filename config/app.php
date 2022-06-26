@@ -58,6 +58,10 @@ return [
 
     'komprehend_api_key' => env('KOMPREHEND_API_KEY', null),
 
+    'filestack_api_key' => env('FILESTACK_API_KEY', null),
+
+    'filestack_security_key' => env('FILESTACK_SECURITY_KEY', null),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

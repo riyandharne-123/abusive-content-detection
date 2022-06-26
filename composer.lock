@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c61ff82cbf0142a401a48a8161e1595a",
+    "content-hash": "812842311b77a8210180f78c98ab9f65",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -492,6 +492,50 @@
                 }
             ],
             "time": "2020-12-29T14:50:06+00:00"
+        },
+        {
+            "name": "filestack/filestack-php",
+            "version": "1.1.11",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/filestack/filestack-php.git",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/filestack/filestack-php/zipball/b1a3fdca59e0b12a01f0170a8b61bbc11737e37e",
+                "reference": "b1a3fdca59e0b12a01f0170a8b61bbc11737e37e",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": ">=6.0",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master",
+                "phploc/phploc": "^4.0",
+                "phpmd/phpmd": "@stable",
+                "phpunit/phpunit": "^5.7",
+                "satooshi/php-coveralls": "^1.0",
+                "theseer/phpdox": "^0.10.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Filestack\\": "filestack",
+                    "Filestack\\Mixins\\": "filestack/mixins"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "ALv2"
+            ],
+            "description": "A Filestack library for PHP",
+            "support": {
+                "issues": "https://github.com/filestack/filestack-php/issues",
+                "source": "https://github.com/filestack/filestack-php/tree/1.1.11"
+            },
+            "time": "2017-11-16T03:31:25+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
